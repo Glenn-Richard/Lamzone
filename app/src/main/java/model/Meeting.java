@@ -1,6 +1,9 @@
 package model;
 
 public class Meeting {
+    /*photo*/
+    private String AvatarUrl;
+
 
     /* Heures du rendez-vous */
     private int hours;
@@ -70,5 +73,13 @@ public class Meeting {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAvatarUrl() {
+        return AvatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        AvatarUrl = avatarUrl;
     }
 }
