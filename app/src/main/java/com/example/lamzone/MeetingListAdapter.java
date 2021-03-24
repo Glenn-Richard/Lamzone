@@ -3,13 +3,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import java.util.ArrayList;
-import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Meeting;
+import utils.MeetDiffCallback;
 
 public class MeetingListAdapter extends RecyclerView.Adapter<ListMeetingViewHolder> {
 
@@ -48,7 +51,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<ListMeetingViewHold
     // PUBLIC API ---
 
     public void updateList(List<Meeting> newList) {
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new UserDiffCallback(newList, this.meetings));
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MeetDiffCallback(newList, this.meetings));
         this.meetings = new ArrayList<>(newList);
         diffResult.dispatchUpdatesTo(this);
     }

@@ -5,6 +5,9 @@ public class Meeting {
     private String AvatarUrl;
 
 
+    private int id;
+
+
     /* Heures du rendez-vous */
     private int hours;
 
@@ -26,7 +29,9 @@ public class Meeting {
 
 
     /* Constructeur*/
-   public Meeting(int hours, int minutes, String location, String subject, String email){
+   public Meeting(String avatarUrl, int id,  int hours, int minutes, String location, String subject, String email){
+       this.AvatarUrl = avatarUrl;
+       this.id = id;
        this.hours = hours;
        this.minutes = minutes;
        this.location = location;
@@ -81,5 +86,13 @@ public class Meeting {
 
     public void setAvatarUrl(String avatarUrl) {
         AvatarUrl = avatarUrl;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
