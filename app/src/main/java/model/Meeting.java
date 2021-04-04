@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Meeting {
     /*photo*/
     private String AvatarUrl;
@@ -25,11 +27,11 @@ public class Meeting {
 
 
     /*Participant du rendez-vous (adresse email)*/
-    private  String email;
+    private List<String> email;
 
 
     /* Constructeur*/
-   public Meeting(String avatarUrl, int id,  int hours, int minutes, String location, String subject, String email){
+   public Meeting(String avatarUrl, int id,  int hours, int minutes, String location, String subject, List email){
        this.AvatarUrl = avatarUrl;
        this.id = id;
        this.hours = hours;
@@ -72,11 +74,11 @@ public class Meeting {
         this.subject = subject;
     }
 
-    public String getEmail() {
+    public List getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(List email) {
         this.email = email;
     }
 

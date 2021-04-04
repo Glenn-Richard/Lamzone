@@ -1,58 +1,42 @@
 package com.example.lamzone;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
-import model.Meeting;
-import utils.MeetDiffCallback;
 
-public class MeetingListAdapter extends RecyclerView.Adapter<ListMeetingViewHolder> {
+public class MeetingListAdapter extends FragmentPagerAdapter {
 
-    // FOR DATA ---
-    private List<Meeting> meetings = new ArrayList<>();
-
-    // FOR CALLBACK ---
-    private final Listener callback;
-    public interface Listener {
-        void onClickDelete(Meeting meeting);
+    public MeetingListAdapter(FragmentManager fm) {
+        super(fm);
     }
 
-    public MeetingListAdapter(Listener callback) {
-        this.callback = callback;
-    }
-
-    @NonNull
+    /**
+     * getItem is called to instantiate the fragment for the given page.
+     * @param position
+     * @return
+     */
     @Override
-    public ListMeetingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_list_meeting, parent,false);
-        return new ListMeetingViewHolder(view);
+    public Fragment getItem(int position) {
+        switch (position){
+            case 0:
+                return NeighbourFragment.newInstance(false);
+            case 1:
+                return NeighbourFragment.newInstance(true);
+            default:
+                return null;
+        }
+
+
     }
 
+    /**
+     * get the number of pages
+     * @return
+     */
     @Override
-    public void onBindViewHolder(@NonNull ListMeetingViewHolder holder, int position) {
-        holder.bind(meetings.get(position), callback);
-    }
-
-    @Override
-    public int getItemCount() {
-        return meetings.size();
-    }
-
-    // PUBLIC API ---
-
-    public void updateList(List<Meeting> newList) {
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MeetDiffCallback(newList, this.meetings));
-        this.meetings = new ArrayList<>(newList);
-        diffResult.dispatchUpdatesTo(this);
+    public int getCount() {
+        return 2;
     }
 }
